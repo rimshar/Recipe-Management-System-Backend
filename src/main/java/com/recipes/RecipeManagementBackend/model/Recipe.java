@@ -18,7 +18,6 @@ public class Recipe {
     @Column
     private String link;
 
-    @Column
     @ManyToOne
     private User user;
 

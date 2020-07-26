@@ -1,9 +1,9 @@
 package com.recipes.RecipeManagementBackend.controller;
 
+import com.recipes.RecipeManagementBackend.RecipeManagementBackendApplication;
 import com.recipes.RecipeManagementBackend.model.Recipe;
 import com.recipes.RecipeManagementBackend.model.User;
 import com.recipes.RecipeManagementBackend.service.RecipeService;
-import javafx.application.Application;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("api/rest/Recipe.svc")
 public class RecipeController {
 
-    private static Logger LOG = LoggerFactory.getLogger(Application.class);
+    private static Logger LOG = LoggerFactory.getLogger(RecipeManagementBackendApplication.class);
 
     private RecipeService recipeService;
 
