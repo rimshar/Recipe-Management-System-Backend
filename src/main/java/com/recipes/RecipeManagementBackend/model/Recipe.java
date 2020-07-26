@@ -18,7 +18,7 @@ public class Recipe {
     @Column
     private String link;
 
-    @Column(name = "submittedBy")
+    @Column
     @ManyToOne
     private User user;
 
