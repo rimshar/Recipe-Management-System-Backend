@@ -13,12 +13,16 @@ import java.util.List;
 @Component
 public class RecipeService {
 
-    @Autowired
     private RecipeRepository recipeRepository;
+
+    @Autowired
+    public RecipeService(RecipeRepository recipeRepository){
+        this.recipeRepository = recipeRepository;
+    }
 
     public Recipe getRecipeById(Long id) {
         return recipeRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Recipe with Id" + id + " not found!"));
+                () -> new EntityNotFoundException("Recipe " + id + " not found!"));
     }
 
     public List<Recipe> getAllRecipes() {
