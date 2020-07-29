@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController("/api/rest/Ingredient.svc")
+@CrossOrigin(origins = "http://localhost:4200")
 public class IngredientController {
 
     private static Logger LOG = LoggerFactory.getLogger(RecipeManagementBackendApplication.class);
