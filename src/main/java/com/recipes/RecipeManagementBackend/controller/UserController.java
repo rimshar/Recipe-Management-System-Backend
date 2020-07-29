@@ -11,6 +11,7 @@ import java.util.List;
 
 
 @RestController("/api/rest/User.svc")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
     private static Logger LOG
             = LoggerFactory.getLogger(UserController.class);
