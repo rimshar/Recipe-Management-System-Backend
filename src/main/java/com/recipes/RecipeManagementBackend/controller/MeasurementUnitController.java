@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("api/rest/MeasurementUnit.svc")
+@RestController("api/rest/MeasurementUnit.svc")
+@CrossOrigin(origins = "http://localhost:4200")
 public class MeasurementUnitController {
 
     private static Logger LOG = LoggerFactory.getLogger(RecipeManagementBackendApplication.class);
