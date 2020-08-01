@@ -1,7 +1,8 @@
-INSERT INTO user(name, surname, email, password)
-VALUES('Roberts', 'Rimsa', 'rimshar@test.com', 'testpassword'),
-('Janis', 'Vilkajs', 'jayvilkajs@test.com', 'beggingtobehacked'),
-('Raimonds', 'Liepins', 'raimonds666@test.com', 'sounencriptedwow');
+INSERT INTO user(username, email, password)
+VALUES('rimshar', 'rimshar@test.com', 'testpassword'),
+('JV', 'jayvilkajs@test.com', 'beggingtobehacked'),
+('raimunal', 'raimonds666@test.com', 'sounencriptedwow'),
+('hasan', 'oscar@test.com', 'seriouspassword');
 
 INSERT INTO ingredient(name)
 VALUES('cheese'),

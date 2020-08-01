@@ -23,6 +23,10 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User " + id + " not found!"));
     }
 
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("User " + username + " not found!"));
+    }
+
     public List<User> getAllUsers() {
         Iterable<User> iterable
                 = userRepository.findAll();

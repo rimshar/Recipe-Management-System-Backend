@@ -10,10 +10,7 @@ public class User {
     private Long id;
 
     @Column
-    private String name;
-
-    @Column
-    private String surname;
+    private String username;
 
     @Column
     private String email;
@@ -29,20 +26,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -65,8 +54,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "userId=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
+                ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
