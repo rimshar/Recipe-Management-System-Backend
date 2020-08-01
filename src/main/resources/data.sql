@@ -12,7 +12,8 @@ VALUES('cheese'),
 INSERT INTO measurement_unit(name)
 VALUES('gram'),
 ('piece'),
-('cup');
+('cup'),
+('liter');
 
 INSERT INTO recipe(name, instructions, link, user_id)
 VALUES('omelette', 'whip up the egg and milk and just cook it on a pan', 'https://www.incredibleegg.org/recipe/basic-french-omelet/', 1),
