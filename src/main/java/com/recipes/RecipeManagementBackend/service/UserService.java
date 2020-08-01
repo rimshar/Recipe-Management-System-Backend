@@ -1,6 +1,7 @@
 package com.recipes.RecipeManagementBackend.service;
 
 import com.recipes.RecipeManagementBackend.exception.EntityNotFoundException;
+import com.recipes.RecipeManagementBackend.model.Recipe;
 import com.recipes.RecipeManagementBackend.model.User;
 import com.recipes.RecipeManagementBackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class UserService {
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("User " + username + " not found!"));
     }
+
 
     public List<User> getAllUsers() {
         Iterable<User> iterable

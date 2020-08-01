@@ -1,6 +1,9 @@
 package com.recipes.RecipeManagementBackend.controller;
 
+import com.recipes.RecipeManagementBackend.model.Recipe;
 import com.recipes.RecipeManagementBackend.model.User;
+import com.recipes.RecipeManagementBackend.repository.RecipeRepository;
+import com.recipes.RecipeManagementBackend.service.RecipeService;
 import com.recipes.RecipeManagementBackend.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,10 +20,12 @@ public class UserController {
             = LoggerFactory.getLogger(UserController.class);
 
     private UserService userService;
+    private RecipeService recipeService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, RecipeService recipeService) {
         this.userService = userService;
+        this.recipeService = recipeService;
     }
 
     @GetMapping("/user/{id}")
@@ -28,6 +33,12 @@ public class UserController {
         LOG.info("getUserById: " + id);
         User user = userService.getUserById(id);
         return user;
+    }
+
+    @GetMapping("/user/{id}/recipes")
+    public List<Recipe> getAllRecipesByUserId(@PathVariable Long id) {
+        LOG.info("getAllRecipesByUserId: " + id);
+        return recipeService.getAllRecipesByUserId(id);
     }
 
     @GetMapping("/users")
