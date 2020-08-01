@@ -1,7 +1,5 @@
 package com.recipes.RecipeManagementBackend.controller;
 
-
-import com.recipes.RecipeManagementBackend.model.Recipe;
 import com.recipes.RecipeManagementBackend.model.RecipeIngredient;
 import com.recipes.RecipeManagementBackend.service.RecipeIngredientService;
 
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//Added to git hub
 @RestController("api/rest/Recipe.svc")
 @CrossOrigin(origins = "http://localhost:4200")
 public class RecipeIngredientController {
