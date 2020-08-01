@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("api/rest/Recipe.svc")
+@RestController("api/rest/RecipeIngredient.svc")
 @CrossOrigin(origins = "http://localhost:4200")
 public class RecipeIngredientController {
     private static Logger LOG = LoggerFactory.getLogger(RecipeIngredientController.class);
@@ -21,22 +21,22 @@ public class RecipeIngredientController {
         this.recipeIngredientService = recipeIngredientService;
     }
 
-    @PostMapping("/recipe_ingredient")
+    @PostMapping("/recipeIngredient")
     public void saveRecipeIngredient(@RequestBody RecipeIngredient recipeIngredient) {
         LOG.info("saveRecipeIngredient: " + recipeIngredient);
         recipeIngredientService.saveRecipeIngredient(recipeIngredient);
     }
 
-    @GetMapping("/recipe_ingredient/{id}")
+    @GetMapping("/recipeIngredient/{id}")
     public RecipeIngredient getRecipeById(@PathVariable Long id) {
         LOG.info("getRecipeIngredientById: " + id);
         RecipeIngredient recipeIngredient = recipeIngredientService.getRecipeIngredientById(id);
         return recipeIngredient;
     }
 
-    @GetMapping("/recipes")
+    @GetMapping("/recipeIngredient")
     public List<RecipeIngredient> getAllRecipes() {
-        LOG.info("getAllRecipes");
+        LOG.info("getAllRecipesIngredient");
         return recipeIngredientService.getAllRecipesIngredient();
     }
 }
