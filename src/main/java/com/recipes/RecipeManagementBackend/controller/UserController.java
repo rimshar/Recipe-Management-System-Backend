@@ -2,6 +2,7 @@ package com.recipes.RecipeManagementBackend.controller;
 
 import com.recipes.RecipeManagementBackend.model.Recipe;
 import com.recipes.RecipeManagementBackend.model.User;
+import com.recipes.RecipeManagementBackend.model.UserTO;
 import com.recipes.RecipeManagementBackend.repository.RecipeRepository;
 import com.recipes.RecipeManagementBackend.service.RecipeService;
 import com.recipes.RecipeManagementBackend.service.UserService;
@@ -47,9 +48,9 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @PostMapping("/user")
-    public void saveUser(@RequestBody User user) {
+    @PostMapping("/register")
+    public void saveUser(@RequestBody UserTO user) {
         LOG.info("saveUser: " + user);
-        userService.saveUser(user);
+        userService.save(user);
     }
 }

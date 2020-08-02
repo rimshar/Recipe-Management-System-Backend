@@ -22,8 +22,7 @@ USE `Final_Project` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Final_Project`.`user` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(85) NOT NULL,
-  `surname` VARCHAR(85) NOT NULL,
+  `username` VARCHAR(85) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
@@ -39,11 +38,11 @@ CREATE TABLE IF NOT EXISTS `Final_Project`.`recipe` (
   `name` VARCHAR(45) NOT NULL,
   `instructions` TEXT(10000) NULL,
   `link` VARCHAR(245) NULL,
-  `owner_id` INT UNSIGNED NOT NULL,
+  `user_id` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_recipe_user1_idx` (`owner_id` ASC) VISIBLE,
+  INDEX `fk_recipe_user1_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `fk_recipe_user1`
-    FOREIGN KEY (`owner_id`)
+    FOREIGN KEY (`user_id`)
     REFERENCES `Final_Project`.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -128,10 +127,12 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-INSERT INTO user(name, surname, email, password)
-VALUES('Roberts', 'Rimsa', 'rimshar@test.com', 'testpassword'),
-('Janis', 'Vilkajs', 'jayvilkajs@test.com', 'beggingtobehacked'),
-('Raimonds', 'Liepins', 'raimonds666@test.com', 'sounencriptedwow');
+
+INSERT INTO user(username, email, password)
+VALUES('RobertsRimsa', 'rimshar@test.com', 'testpassword'),
+('JanisVilkajs', 'jayvilkajs@test.com', 'beggingtobehacked'),
+('RaimondsLiepins', 'raimonds666@test.com', 'sounencriptedwow'),
+('Oskarsss', 'oskarssssszzzz@test.com', 'thisshouldbeencriptednow');
 
 INSERT INTO ingredient(name)
 VALUES('cheese'),
