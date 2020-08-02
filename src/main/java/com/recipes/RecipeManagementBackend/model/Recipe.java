@@ -1,6 +1,7 @@
 package com.recipes.RecipeManagementBackend.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Recipe {
@@ -19,6 +20,7 @@ public class Recipe {
     private String link;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Long getId() {
@@ -60,4 +62,5 @@ public class Recipe {
     public void setUser(User user) {
         this.user = user;
     }
+    
 }

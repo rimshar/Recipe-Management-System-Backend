@@ -4,6 +4,7 @@ import com.recipes.RecipeManagementBackend.exception.EntityNotFoundException;
 import com.recipes.RecipeManagementBackend.model.Recipe;
 import com.recipes.RecipeManagementBackend.model.User;
 import com.recipes.RecipeManagementBackend.repository.RecipeRepository;
+import com.recipes.RecipeManagementBackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,9 +27,8 @@ public class RecipeService {
                 () -> new EntityNotFoundException("Recipe " + id + " not found!"));
     }
 
-    @Transactional
-    public List<Recipe> getAllRecipesByUserId(long id) {
-        return recipeRepository.findAllByUserId(id);
+    public List<Recipe> getAllRecipesByUsername(String username) {
+        return recipeRepository.findAllByUserUsername(username);
     }
 
     public List<Recipe> getAllRecipes() {
