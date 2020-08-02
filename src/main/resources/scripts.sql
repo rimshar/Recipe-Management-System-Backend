@@ -26,7 +26,8 @@ CREATE TABLE IF NOT EXISTS `Final_Project`.`user` (
   `email` VARCHAR(45) NOT NULL,
   `password` VARCHAR(300) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
