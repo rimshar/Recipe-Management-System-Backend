@@ -1,5 +1,6 @@
 package com.recipes.RecipeManagementBackend.controller;
 
+import com.recipes.RecipeManagementBackend.exception.UserAlreadyExists;
 import com.recipes.RecipeManagementBackend.model.Recipe;
 import com.recipes.RecipeManagementBackend.model.User;
 import com.recipes.RecipeManagementBackend.model.UserTO;
@@ -10,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import sun.plugin2.message.Message;
 
 import java.util.List;
 
@@ -52,5 +54,6 @@ public class UserController {
     public void saveUser(@RequestBody UserTO user) {
         LOG.info("saveUser: " + user);
         userService.save(user);
+
     }
 }
