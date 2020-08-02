@@ -48,4 +48,20 @@ public class IngredientMeasurementUnit {
     public void setMeasurementUnit(MeasurementUnit measurementUnit) {
         this.measurementUnit = measurementUnit;
     }
+
+    public Long getIngredientId() {
+        return ingredientId;
+    }
+
+    public void setIngredientId(Long ingredientId) {
+        this.ingredientId = ingredientId;
+    }
+
+    public Long getMeasurementUnitId() {
+        return measurementUnitId;
+    }
+
+    public void setMeasurementUnitId(Long measurementUnitId) {
+        this.measurementUnitId = measurementUnitId;
+    }
 }
