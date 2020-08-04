@@ -149,7 +149,8 @@ VALUES('cheese'),
 INSERT INTO measurement_unit(name)
 VALUES('gram'),
 ('piece'),
-('cup');
+('cup'),
+('millilitre');
 
 INSERT INTO recipe(name, instructions, link, user_id)
 VALUES('omelette', 'whip up the egg and milk and just cook it on a pan', 'https://www.incredibleegg.org/recipe/basic-french-omelet/', 1),
@@ -161,3 +162,16 @@ sprinkle with grated cheese', 'https://www.food.com/recipe/cheese-omelette-omele
 ('boiled egg', 'put egg in water,
 boil the water,
 voila!', 'https://www.simplyrecipes.com/recipes/how_to_make_perfect_hard_boiled_eggs/', 3);
+
+INSERT INTO ingredient_has_measurement_unit(ingredient_id, measurement_unit_id)
+VALUES (1, 1),
+(2, 3),
+(3, 2);
+
+INSERT INTO recipe_ingredient(recipe_id, ingredient_id, measurement_unit_id, quantity)
+VALUES (1, 3, 2, 3),
+(1, 2, 4, 50),
+(2, 3, 2, 3),
+(2, 2, 4, 50),
+(2, 1, 1, 50),
+(3, 3, 2, 1);

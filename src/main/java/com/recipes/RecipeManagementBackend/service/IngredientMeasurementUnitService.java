@@ -1,7 +1,6 @@
 package com.recipes.RecipeManagementBackend.service;
 
 import com.recipes.RecipeManagementBackend.exception.EntityNotFoundException;
-import com.recipes.RecipeManagementBackend.model.Ingredient;
 import com.recipes.RecipeManagementBackend.model.IngredientMeasurementUnit;
 import com.recipes.RecipeManagementBackend.model.MeasurementUnit;
 import com.recipes.RecipeManagementBackend.repository.IngredientMeasurementUnitRepository;
