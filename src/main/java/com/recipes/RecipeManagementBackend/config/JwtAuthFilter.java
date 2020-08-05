@@ -46,6 +46,7 @@ public class JwtAuthFilter extends BasicAuthenticationFilter {
 		}
 
 		String jwtToken = requestTokenHeader.substring(PREFIX.length());
+		System.out.println(jwtToken);
 		Claims claims = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(jwtToken).getBody();
 
 		if (!claims.getExpiration().after(new Date())) {

@@ -17,7 +17,8 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 CREATE SCHEMA IF NOT EXISTS `Final_Project` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ;
 USE `Final_Project` ;
 
--- -----------------------------------------------------
+
+
 -- Table `Final_Project`.`user`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Final_Project`.`user` (
@@ -26,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `Final_Project`.`user` (
   `email` VARCHAR(45) NOT NULL,
   `password` VARCHAR(300) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE)
 ENGINE = InnoDB;
 
@@ -136,10 +137,10 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 INSERT INTO user(username, email, password)
-VALUES('RobertsRimsa', 'rimshar@test.com', 'testpassword'),
-('JanisVilkajs', 'jayvilkajs@test.com', 'beggingtobehacked'),
-('RaimondsLiepins', 'raimonds666@test.com', 'sounencriptedwow'),
-('Oskarsss', 'oskarssssszzzz@test.com', 'thisshouldbeencriptednow');
+VALUES('Roberts', 'rimshar@test.com', '$2a$10$X8T3Yy.BxAFS2UGOftGsZuUqQ818bjI3qne9KoaqLejdx8WSKKQYe'),
+('Janis', 'jayvilkajs@test.com', '$2a$10$zNTPiMA1fxSOJp631qhCfOXQBL1sBMupKIv9MFpg/PavkM.Jr4oyS'),
+('Raimonds', 'raimonds666@test.com', '$2a$10$jDbV/nmDijud0hwLqRBnPuIzJYGwY8AUVPeZq8U3RGEHl.JsrS5jG'),
+('Oskars', 'oskarssssszzzz@test.com', '$2a$10$XjY9zcN4VeIput1iQcl8IulHwflIxMnqWPXPIZN97JYvYBG0Hmx5i');
 
 INSERT INTO ingredient(name)
 VALUES('cheese'),
