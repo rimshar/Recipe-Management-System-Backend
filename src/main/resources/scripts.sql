@@ -17,7 +17,8 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 CREATE SCHEMA IF NOT EXISTS `Final_Project` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ;
 USE `Final_Project` ;
 
--- -----------------------------------------------------
+
+
 -- Table `Final_Project`.`user`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Final_Project`.`user` (
@@ -26,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `Final_Project`.`user` (
   `email` VARCHAR(45) NOT NULL,
   `password` VARCHAR(300) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE)
 ENGINE = InnoDB;
 
@@ -136,10 +137,10 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 INSERT INTO user(username, email, password)
-VALUES('RobertsRimsa', 'rimshar@test.com', 'testpassword'),
-('JanisVilkajs', 'jayvilkajs@test.com', 'beggingtobehacked'),
-('RaimondsLiepins', 'raimonds666@test.com', 'sounencriptedwow'),
-('Oskarsss', 'oskarssssszzzz@test.com', 'thisshouldbeencriptednow');
+VALUES('Roberts', 'rimshar@test.com', '$2a$10$X8T3Yy.BxAFS2UGOftGsZuUqQ818bjI3qne9KoaqLejdx8WSKKQYe'),
+('Janis', 'jayvilkajs@test.com', '$2a$10$zNTPiMA1fxSOJp631qhCfOXQBL1sBMupKIv9MFpg/PavkM.Jr4oyS'),
+('Raimonds', 'raimonds666@test.com', '$2a$10$jDbV/nmDijud0hwLqRBnPuIzJYGwY8AUVPeZq8U3RGEHl.JsrS5jG'),
+('Oskars', 'oskarssssszzzz@test.com', '$2a$10$XjY9zcN4VeIput1iQcl8IulHwflIxMnqWPXPIZN97JYvYBG0Hmx5i');
 
 INSERT INTO ingredient(name)
 VALUES('cheese'),
@@ -149,7 +150,8 @@ VALUES('cheese'),
 INSERT INTO measurement_unit(name)
 VALUES('gram'),
 ('piece'),
-('cup');
+('cup'),
+('millilitre');
 
 INSERT INTO recipe(name, instructions, link, user_id)
 VALUES('omelette', 'whip up the egg and milk and just cook it on a pan', 'https://www.incredibleegg.org/recipe/basic-french-omelet/', 1),
@@ -161,3 +163,16 @@ sprinkle with grated cheese', 'https://www.food.com/recipe/cheese-omelette-omele
 ('boiled egg', 'put egg in water,
 boil the water,
 voila!', 'https://www.simplyrecipes.com/recipes/how_to_make_perfect_hard_boiled_eggs/', 3);
+
+INSERT INTO ingredient_has_measurement_unit(ingredient_id, measurement_unit_id)
+VALUES (1, 1),
+(2, 3),
+(3, 2);
+
+INSERT INTO recipe_ingredient(recipe_id, ingredient_id, measurement_unit_id, quantity)
+VALUES (1, 3, 2, 3),
+(1, 2, 4, 50),
+(2, 3, 2, 3),
+(2, 2, 4, 50),
+(2, 1, 1, 50),
+(3, 3, 2, 1);

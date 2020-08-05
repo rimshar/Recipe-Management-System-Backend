@@ -4,7 +4,6 @@ import com.recipes.RecipeManagementBackend.exception.UserAlreadyExists;
 import com.recipes.RecipeManagementBackend.model.Recipe;
 import com.recipes.RecipeManagementBackend.model.User;
 import com.recipes.RecipeManagementBackend.model.UserTO;
-import com.recipes.RecipeManagementBackend.repository.RecipeRepository;
 import com.recipes.RecipeManagementBackend.service.RecipeService;
 import com.recipes.RecipeManagementBackend.service.UserService;
 import org.slf4j.Logger;
@@ -38,10 +37,10 @@ public class UserController {
         return user;
     }
 
-    @GetMapping("/user/{id}/recipes")
-    public List<Recipe> getAllRecipesByUserId(@PathVariable Long id) {
-        LOG.info("getAllRecipesByUserId: " + id);
-        return recipeService.getAllRecipesByUserId(id);
+    @GetMapping("/{username}/recipes")
+    public List<Recipe> getAllRecipesByUsername(@PathVariable String username) {
+        LOG.info("getAllRecipesByUsername: " + username);
+        return recipeService.getAllRecipesByUsername(username);
     }
 
     @GetMapping("/users")

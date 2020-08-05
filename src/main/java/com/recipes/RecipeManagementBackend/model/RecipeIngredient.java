@@ -1,7 +1,6 @@
 package com.recipes.RecipeManagementBackend.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class RecipeIngredient {
@@ -13,21 +12,21 @@ public class RecipeIngredient {
     private Long ingredientId;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Ingredient")
+    @JoinColumn(name = "ingredient")
     private Ingredient ingredient;
 
     @Column
     private Long measurementUnitId;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Measurement_unit")
+    @JoinColumn(name = "measurement_unit")
     private MeasurementUnit measurementUnit;
 
     @Column
     private Long recipeId;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Recipe")
+    @JoinColumn(name = "recipe")
     private Recipe recipe;
 
     @Column
