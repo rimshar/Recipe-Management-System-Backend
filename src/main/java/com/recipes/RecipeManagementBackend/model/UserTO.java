@@ -4,6 +4,8 @@ public class UserTO {
     private String username;
     private String password;
     private String email;
+    private User user;
+
 
     public String getUsername() {
         return username;

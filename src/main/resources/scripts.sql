@@ -101,6 +101,39 @@ CREATE TABLE IF NOT EXISTS `Final_Project`.`recipe_ingredient` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `Final_Project`.`role`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Final_Project`.`role` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `role` VARCHAR(90) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `role_UNIQUE` (`role` ASC) VISIBLE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Final_Project`.`user_has_role`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Final_Project`.`user_has_role` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` INT UNSIGNED NOT NULL,
+  `role_id` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`, `user_id`, `role_id`),
+  INDEX `fk_user_has_role_role1_idx` (`role_id` ASC) VISIBLE,
+  INDEX `fk_user_has_role_user1_idx` (`user_id` ASC) VISIBLE,
+  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC) VISIBLE,
+  CONSTRAINT `fk_user_has_role_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `Final_Project`.`user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_user_has_role_role1`
+    FOREIGN KEY (`role_id`)
+    REFERENCES `Final_Project`.`role` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `Final_Project`.`ingredient_has_measurement_unit`
@@ -176,3 +209,14 @@ VALUES (1, 3, 2, 3),
 (2, 2, 4, 50),
 (2, 1, 1, 50),
 (3, 3, 2, 1);
+
+INSERT INTO role(role)
+VALUES('ROLE_USER'),
+('ROLE_ADMIN');
+
+
+INSERT INTO user_has_role(user_id, role_id)
+VALUES(1, 1),
+(2, 2),
+(3, 2),
+(4, 2);
