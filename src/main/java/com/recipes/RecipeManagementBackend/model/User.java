@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -28,7 +27,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @OneToOne
+    @ManyToOne
     @JoinTable(
             name = "user_has_role",
             joinColumns = @JoinColumn(name = "user_id"),

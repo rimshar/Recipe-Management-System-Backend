@@ -49,7 +49,7 @@ public class UserController {
 
     @PostMapping("/register")
     public void saveUser(@RequestBody UserTO user) {
-        LOG.info("saveUser: " + user);
+        LOG.info("saveUser: " + user.toString());
         userService.save(user);
     }
 }

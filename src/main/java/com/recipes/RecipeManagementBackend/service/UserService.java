@@ -3,6 +3,7 @@ package com.recipes.RecipeManagementBackend.service;
 import com.recipes.RecipeManagementBackend.exception.EntityNotFoundException;
 import com.recipes.RecipeManagementBackend.model.User;
 import com.recipes.RecipeManagementBackend.model.UserTO;
+import com.recipes.RecipeManagementBackend.repository.RoleRepository;
 import com.recipes.RecipeManagementBackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,12 +17,14 @@ import java.util.List;
 public class UserService {
 
     private UserRepository userRepository;
+    private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder){
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository){
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.roleRepository = roleRepository;
     }
 
     public User getUserById(Long id) {
@@ -52,6 +55,7 @@ public class UserService {
         userEntity.setUsername(user.getUsername());
         userEntity.setEmail(user.getEmail());
         userEntity.setPassword(passwordEncoder.encode(user.getPassword()));
+        userEntity.setRole(roleRepository.findByRole(user.getRole()));
         return userRepository.save(userEntity);
     }
 }
