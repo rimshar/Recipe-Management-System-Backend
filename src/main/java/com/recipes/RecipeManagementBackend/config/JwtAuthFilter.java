@@ -1,7 +1,12 @@
 package com.recipes.RecipeManagementBackend.config;
 
+import com.recipes.RecipeManagementBackend.exception.EntityNotFoundException;
+import com.recipes.RecipeManagementBackend.model.User;
+import com.recipes.RecipeManagementBackend.repository.UserRepository;
+import com.recipes.RecipeManagementBackend.service.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,44 +27,48 @@ import java.util.Set;
 
 public class JwtAuthFilter extends BasicAuthenticationFilter {
 
-	private static final String HEADER = "Authorization";
-	private static final String PREFIX = "Bearer ";
+    private static final String HEADER = "Authorization";
+    private static final String PREFIX = "Bearer ";
 
-	@Value("${app.authentication.signature.secret}")
-	private String SECRET;
+    @Autowired
+    private UserService userService;
 
-	public JwtAuthFilter(AuthenticationManager authenticationManager) {
-		super(authenticationManager);
-	}
+    @Value("${app.authentication.signature.secret}")
+    private String SECRET;
 
-	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
-		String requestTokenHeader = request.getHeader(HEADER);
+    public JwtAuthFilter(AuthenticationManager authenticationManager) {
+        super(authenticationManager);
+    }
 
-		if (requestTokenHeader == null) {
-			chain.doFilter(request, response);
-			return;
-		}
-		if (!requestTokenHeader.startsWith(PREFIX)) {
-			chain.doFilter(request, response);
-			return;
-		}
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
+        String requestTokenHeader = request.getHeader(HEADER);
 
-		String jwtToken = requestTokenHeader.substring(PREFIX.length());
-		System.out.println(jwtToken);
-		Claims claims = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(jwtToken).getBody();
+        if (requestTokenHeader == null) {
+            chain.doFilter(request, response);
+            return;
+        }
+        if (!requestTokenHeader.startsWith(PREFIX)) {
+            chain.doFilter(request, response);
+            return;
+        }
 
-		if (!claims.getExpiration().after(new Date())) {
-			chain.doFilter(request, response);
-			return;
-		}
+        String jwtToken = requestTokenHeader.substring(PREFIX.length());
+        System.out.println(jwtToken);
+        Claims claims = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(jwtToken).getBody();
 
-		Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
-		authorities.add(new SimpleGrantedAuthority("ROLE_ADMINISTRATOR"));
+        if (!claims.getExpiration().after(new Date())) {
+            chain.doFilter(request, response);
+            return;
+        }
 
-		Authentication authentication = new UsernamePasswordAuthenticationToken(claims.getSubject(), null, authorities);
+		User user = userService.getUserById(Long.parseLong(claims.getSubject()));
+        Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+        authorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
 
-		SecurityContextHolder.getContext().setAuthentication(authentication);
-		chain.doFilter(request, response);
-	}
+        Authentication authentication = new UsernamePasswordAuthenticationToken(claims.getSubject(), null, authorities);
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        chain.doFilter(request, response);
+    }
 }

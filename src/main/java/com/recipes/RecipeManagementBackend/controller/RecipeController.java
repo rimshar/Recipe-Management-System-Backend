@@ -29,7 +29,7 @@ public class RecipeController {
         return recipe;
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMINISTRATOR')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/recipes")
     public List<Recipe> getAllRecipes() {
         LOG.info("getAllRecipes");

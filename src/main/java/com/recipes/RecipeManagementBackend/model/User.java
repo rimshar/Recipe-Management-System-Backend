@@ -95,8 +95,8 @@ public class User implements UserDetails {
         return true;
     }
 
-    public Role getRole() {
-        return role;
+    public Roles getRole() {
+        return role.getRole();
     }
 
     public void setRole(Role role) {
