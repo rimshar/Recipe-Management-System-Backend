@@ -1,15 +1,16 @@
 package com.recipes.RecipeManagementBackend.controller;
 
-import com.recipes.RecipeManagementBackend.model.Ingredient;
 import com.recipes.RecipeManagementBackend.model.IngredientMeasurementUnit;
 import com.recipes.RecipeManagementBackend.model.MeasurementUnit;
 import com.recipes.RecipeManagementBackend.service.IngredientMeasurementUnitService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController("/api/rest/IngredientMeasurementUser.svc")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -43,6 +44,7 @@ public class IngredientMeasurementUnitController {
         return ingredientMeasurementUnitService.getAllMeasurementUnitsForIngredient(id);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/ingredient-measurement-unit")
     public void saveIngredientMeasurementUnit(@RequestBody IngredientMeasurementUnit ingredientMeasurementUnit) {
         LOG.info("saveIngredientMeasurementUnit: " + ingredientMeasurementUnit);

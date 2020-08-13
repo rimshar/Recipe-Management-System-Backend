@@ -6,9 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class User implements UserDetails {
@@ -69,8 +67,9 @@ public class User implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority(role.getRole().toString()));
         return authorities;
     }
@@ -95,8 +94,8 @@ public class User implements UserDetails {
         return true;
     }
 
-    public Roles getRole() {
-        return role.getRole();
+    public Role getRole() {
+        return role;
     }
 
     public void setRole(Role role) {

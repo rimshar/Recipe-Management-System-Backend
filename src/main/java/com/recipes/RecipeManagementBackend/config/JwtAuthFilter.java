@@ -1,8 +1,6 @@
 package com.recipes.RecipeManagementBackend.config;
 
-import com.recipes.RecipeManagementBackend.exception.EntityNotFoundException;
 import com.recipes.RecipeManagementBackend.model.User;
-import com.recipes.RecipeManagementBackend.repository.UserRepository;
 import com.recipes.RecipeManagementBackend.service.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -64,7 +62,7 @@ public class JwtAuthFilter extends BasicAuthenticationFilter {
 
 		User user = userService.getUserById(Long.parseLong(claims.getSubject()));
         Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
+        authorities.add(new SimpleGrantedAuthority(user.getRole().getRole().toString()));
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(claims.getSubject(), null, authorities);
 
