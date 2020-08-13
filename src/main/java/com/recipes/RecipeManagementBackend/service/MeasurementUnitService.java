@@ -36,4 +36,8 @@ public class MeasurementUnitService {
         return measurementUnitRepository.save(measurementUnit);
     }
 
+    public MeasurementUnit getMeasurementUnitByName(String name){
+        return measurementUnitRepository.findByName(name).orElseThrow(() -> new EntityNotFoundException("Measurement Unit " + name + " not found!"));
+    }
+
 }

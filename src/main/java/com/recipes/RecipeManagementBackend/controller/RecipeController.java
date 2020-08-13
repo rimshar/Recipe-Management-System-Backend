@@ -1,6 +1,9 @@
 package com.recipes.RecipeManagementBackend.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.recipes.RecipeManagementBackend.model.Recipe;
+import com.recipes.RecipeManagementBackend.model.RecipeTO;
 import com.recipes.RecipeManagementBackend.service.RecipeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +39,9 @@ public class RecipeController {
     }
 
     @PostMapping("/recipe")
-    public void saveRecipe(@RequestBody Recipe recipe) {
+    public void saveRecipe(@RequestBody String json) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        RecipeTO recipe = objectMapper.readValue(json, RecipeTO.class);
         LOG.info("saveRecipe: " + recipe);
         recipeService.saveRecipe(recipe);
     }

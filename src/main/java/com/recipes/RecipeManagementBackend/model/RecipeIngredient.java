@@ -8,25 +8,16 @@ public class RecipeIngredient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private Long ingredientId;
-
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ingredient")
+    @JoinColumn(name = "ingredient_id")
     private Ingredient ingredient;
 
-    @Column
-    private Long measurementUnitId;
-
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "measurement_unit")
+    @JoinColumn(name = "measurement_unit_id")
     private MeasurementUnit measurementUnit;
 
-    @Column
-    private Long recipeId;
-
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "recipe")
+    @JoinColumn(name = "recipe_id")
     private Recipe recipe;
 
     @Column
@@ -72,27 +63,4 @@ public class RecipeIngredient {
         this.quantity = quantity;
     }
 
-    public Long getIngredientId() {
-        return ingredientId;
-    }
-
-    public void setIngredientId(Long ingredientId) {
-        this.ingredientId = ingredientId;
-    }
-
-    public Long getMeasurementUnitId() {
-        return measurementUnitId;
-    }
-
-    public void setMeasurementUnitId(Long measurementUnitId) {
-        this.measurementUnitId = measurementUnitId;
-    }
-
-    public Long getRecipeId() {
-        return recipeId;
-    }
-
-    public void setRecipeId(Long recipeId) {
-        this.recipeId = recipeId;
-    }
 }

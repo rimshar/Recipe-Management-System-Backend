@@ -2,7 +2,6 @@ package com.recipes.RecipeManagementBackend.service;
 
 import com.recipes.RecipeManagementBackend.exception.EntityNotFoundException;
 import com.recipes.RecipeManagementBackend.model.Ingredient;
-import com.recipes.RecipeManagementBackend.model.Recipe;
 import com.recipes.RecipeManagementBackend.repository.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,12 +23,17 @@ public class IngredientService {
                 () -> new EntityNotFoundException("Ingredient " + id + " not found!"));
     }
 
+    public Ingredient getIngredientByName(String name){
+        return ingredientRepository.findByName(name).orElseThrow(
+                () -> new EntityNotFoundException("Ingredient " + name + " not found!"));
+    }
+
     public List<Ingredient> getAllIngredients() {
         return ingredientRepository.findAll();
     }
 
-    public void saveIngredient(Ingredient ingredient) {
-        ingredientRepository.save(ingredient);
+    public Ingredient saveIngredient(Ingredient ingredient) {
+        return ingredientRepository.save(ingredient);
     }
 
 }

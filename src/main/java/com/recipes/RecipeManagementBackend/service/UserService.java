@@ -45,10 +45,6 @@ public class UserService {
         return result;
     }
 
-//    public User saveUser(User user){
-//        return userRepository.save(user);
-//    }
-
     @Transactional(rollbackFor = Exception.class)
     public User save(final UserTO user) {
         final User userEntity = new User();
