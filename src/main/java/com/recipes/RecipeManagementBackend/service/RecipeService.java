@@ -56,7 +56,8 @@ public class RecipeService {
         for (RecipeIngredientTO ingredient : recipe.getIngredientBlock()) {
             final RecipeIngredient ingredients = new RecipeIngredient();
             ingredients.setQuantity(ingredient.getQuantity());
-            ingredients.setRecipe(recipeRepository.getOne(recipeId));
+            ingredients.setRecipeId(recipeId);
+            // ingredients.setRecipe(recipeRepository.getOne(recipeId));
 
 
             try {

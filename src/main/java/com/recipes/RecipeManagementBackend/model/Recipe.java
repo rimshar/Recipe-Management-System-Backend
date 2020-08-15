@@ -23,6 +23,10 @@ public class Recipe {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @OneToMany
+    @JoinColumn(name = "recipeId")
+    private List<RecipeIngredient> recipeIngredients;
+
     public Long getId() {
         return id;
     }
@@ -62,5 +66,8 @@ public class Recipe {
     public void setUser(User user) {
         this.user = user;
     }
-    
+
+    public List<RecipeIngredient> getRecipeIngredients() {
+        return recipeIngredients;
+    }
 }

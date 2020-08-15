@@ -16,9 +16,12 @@ public class RecipeIngredient {
     @JoinColumn(name = "measurement_unit_id")
     private MeasurementUnit measurementUnit;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "recipe_id")
-    private Recipe recipe;
+    @Column
+    private Long recipeId;
+
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "recipe_id")
+//    private Recipe recipe;
 
     @Column
     private Double quantity;
@@ -47,13 +50,13 @@ public class RecipeIngredient {
         this.measurementUnit = measurementUnit;
     }
 
-    public Recipe getRecipe() {
-        return recipe;
-    }
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    }
+//    public Recipe getRecipe() {
+//        return recipe;
+//    }
+//
+//    public void setRecipe(Recipe recipe) {
+//        this.recipe = recipe;
+//    }
 
     public Double getQuantity() {
         return quantity;
@@ -63,4 +66,11 @@ public class RecipeIngredient {
         this.quantity = quantity;
     }
 
+    public Long getRecipeId() {
+        return recipeId;
+    }
+
+    public void setRecipeId(Long recipeId) {
+        this.recipeId = recipeId;
+    }
 }
