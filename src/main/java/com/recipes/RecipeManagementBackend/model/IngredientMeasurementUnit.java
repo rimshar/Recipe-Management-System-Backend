@@ -5,6 +5,7 @@ import javax.persistence.*;
 //Defines allowed Measurement Units for specific Ingredients
 
 @Entity
+@Table(name="ingredient_has_measurement_unit")
 public class IngredientMeasurementUnit {
 
     @Id
@@ -15,14 +16,14 @@ public class IngredientMeasurementUnit {
     private Long ingredientId;
 
     @OneToOne
-    @JoinColumn(name = "ingredient")
+    @JoinColumn(name = "ingredientId", insertable = false, updatable = false)
     private Ingredient ingredient;
 
     @Column
     private Long measurementUnitId;
 
     @OneToOne
-    @JoinColumn(name = "measurement_unit")
+    @JoinColumn(name = "measurementUnitId", insertable = false, updatable = false)
     private MeasurementUnit measurementUnit;
 
     public Long getId() {
@@ -37,16 +38,8 @@ public class IngredientMeasurementUnit {
         return ingredient;
     }
 
-    public void setIngredient(Ingredient ingredient) {
-        this.ingredient = ingredient;
-    }
-
     public MeasurementUnit getMeasurementUnit() {
         return measurementUnit;
-    }
-
-    public void setMeasurementUnit(MeasurementUnit measurementUnit) {
-        this.measurementUnit = measurementUnit;
     }
 
     public Long getIngredientId() {
