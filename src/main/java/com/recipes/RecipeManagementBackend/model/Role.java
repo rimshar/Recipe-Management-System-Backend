@@ -21,7 +21,7 @@ public class Role {
         this.id = id;
     }
 
-    public Roles getRole() {
+    public Roles getRoleName() {
         return role;
     }
 

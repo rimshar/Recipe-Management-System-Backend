@@ -70,7 +70,7 @@ public class User implements UserDetails {
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority(role.getRole().toString()));
+        authorities.add(new SimpleGrantedAuthority(role.getRoleName().toString()));
         return authorities;
     }
 

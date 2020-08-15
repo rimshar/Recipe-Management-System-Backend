@@ -3,6 +3,7 @@ package com.recipes.RecipeManagementBackend.controller;
 import com.recipes.RecipeManagementBackend.config.AuthenticationResult;
 import com.recipes.RecipeManagementBackend.config.SecurityService;
 import com.recipes.RecipeManagementBackend.model.UserTO;
+import com.recipes.RecipeManagementBackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,11 +20,13 @@ public class AuthController {
 
 	private AuthenticationManager authenticationManager;
 	private SecurityService securityService;
+	private UserService userService;
 
 	@Autowired
-	public AuthController(AuthenticationManager authenticationManager, SecurityService securityService){
+	public AuthController(AuthenticationManager authenticationManager, SecurityService securityService, UserService userService){
 		this.authenticationManager = authenticationManager;
 		this.securityService = securityService;
+		this.userService = userService;
 	}
 
 	@PostMapping("/login")
@@ -33,7 +36,7 @@ public class AuthController {
 		} catch (Exception e) {
 			throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED, "Bad credentials");
 		}
-
-		return new AuthenticationResult(securityService.generateToken(securityService.loadUserByUsername(userTO.getUsername())));
+		Long role = userService.getUserRoleByUsername(userTO.getUsername());
+		return new AuthenticationResult(securityService.generateToken(securityService.loadUserByUsername(userTO.getUsername())), role);
 	}
 }
