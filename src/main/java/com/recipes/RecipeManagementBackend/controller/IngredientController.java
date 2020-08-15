@@ -6,7 +6,6 @@ import com.recipes.RecipeManagementBackend.service.IngredientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,7 +30,7 @@ public class IngredientController {
         return ingredient;
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMINISTRATOR')")
+
     @GetMapping("/ingredients")
     public List<Ingredient> getAllIngredients() {
         LOG.info("getAllIngredients");

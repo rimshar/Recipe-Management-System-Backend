@@ -9,6 +9,7 @@ import com.recipes.RecipeManagementBackend.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sun.plugin2.message.Message;
 
@@ -43,6 +44,7 @@ public class UserController {
         return recipeService.getAllRecipesByUsername(username);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/users")
     public List<User> getAllUsers() {
         LOG.info("getAllUsers");
@@ -51,7 +53,7 @@ public class UserController {
 
     @PostMapping("/register")
     public void saveUser(@RequestBody UserTO user) {
-        LOG.info("saveUser: " + user);
+        LOG.info("saveUser: " + user.toString());
         userService.save(user);
 
     }

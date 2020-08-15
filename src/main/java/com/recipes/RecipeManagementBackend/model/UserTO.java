@@ -4,6 +4,8 @@ public class UserTO {
     private String username;
     private String password;
     private String email;
+    private Roles role;
+
 
     public String getUsername() {
         return username;
@@ -27,5 +29,26 @@ public class UserTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Roles getRole() {
+        if(role == null){
+            return Roles.ROLE_USER;
+        }
+        return role;
+    }
+
+    public void setRole(Roles role) {
+        this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "UserTO{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", role=" + role +
+                '}';
     }
 }

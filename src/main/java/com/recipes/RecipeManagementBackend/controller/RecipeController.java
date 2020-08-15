@@ -1,11 +1,13 @@
 package com.recipes.RecipeManagementBackend.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.recipes.RecipeManagementBackend.model.Recipe;
+import com.recipes.RecipeManagementBackend.model.RecipeTO;
 import com.recipes.RecipeManagementBackend.service.RecipeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,7 +31,7 @@ public class RecipeController {
         return recipe;
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMINISTRATOR')")
+
     @GetMapping("/recipes")
     public List<Recipe> getAllRecipes() {
         LOG.info("getAllRecipes");
@@ -37,7 +39,9 @@ public class RecipeController {
     }
 
     @PostMapping("/recipe")
-    public void saveRecipe(@RequestBody Recipe recipe) {
+    public void saveRecipe(@RequestBody String json) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        RecipeTO recipe = objectMapper.readValue(json, RecipeTO.class);
         LOG.info("saveRecipe: " + recipe);
         recipeService.saveRecipe(recipe);
     }
