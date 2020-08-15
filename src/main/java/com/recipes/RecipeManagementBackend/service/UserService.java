@@ -34,6 +34,10 @@ public class UserService {
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("User " + username + " not found!"));
     }
+    public boolean usernameExists(String username){
+        return userRepository.findByUsername(username).isPresent();
+    }
+
 
     public Long getUserRoleByUsername(String username) {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("User " + username + " not found!"));
@@ -53,6 +57,11 @@ public class UserService {
 
     @Transactional(rollbackFor = Exception.class)
     public User save(final UserTO user) {
+
+        if(usernameExists(user.getUsername())){
+            throw new EntityNotFoundException("User"+ user.getUsername() + "user already exists");
+        }
+
         final User userEntity = new User();
         userEntity.setUsername(user.getUsername());
         userEntity.setEmail(user.getEmail());
