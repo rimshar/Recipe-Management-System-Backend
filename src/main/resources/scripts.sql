@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS `Final_Project`.`recipe` (
   `name` VARCHAR(45) NOT NULL,
   `instructions` TEXT(10000) NULL,
   `link` VARCHAR(245) NULL,
+  `picture_link` VARCHAR(245) NULL,
   `user_id` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_recipe_user1_idx` (`user_id` ASC) VISIBLE,
@@ -188,16 +189,16 @@ VALUES('gram'),
 ('cup'),
 ('millilitre');
 
-INSERT INTO recipe(name, instructions, link, user_id)
-VALUES('omelette', 'whip up the egg and milk and just cook it on a pan', 'https://www.incredibleegg.org/recipe/basic-french-omelet/', 1),
+INSERT INTO recipe(name, instructions, link, user_id, picture_link)
+VALUES('omelette', 'whip up the egg and milk and just cook it on a pan', 'https://www.incredibleegg.org/recipe/basic-french-omelet/', 1, 'https://www.healthyfood.com/wp-content/uploads/2018/02/Basic-omelette-1024x656.jpg'),
 ('omelette au fromage', 'take the eggs,
 smash em,
 add the milk,
 whip it,
-sprinkle with grated cheese', 'https://www.food.com/recipe/cheese-omelette-omelette-au-fromage-271739', 2),
+sprinkle with grated cheese', 'https://www.food.com/recipe/cheese-omelette-omelette-au-fromage-271739', 2, 'https://food-images.files.bbci.co.uk/food/recipes/cheeseomelette_80621_16x9.jpg'),
 ('boiled egg', 'put egg in water,
 boil the water,
-voila!', 'https://www.simplyrecipes.com/recipes/how_to_make_perfect_hard_boiled_eggs/', 3);
+voila!', 'https://www.simplyrecipes.com/recipes/how_to_make_perfect_hard_boiled_eggs/', 3, 'https://minimalistbaker.com/wp-content/uploads/2020/01/Hard-Boiled-Eggs-SQUARE.jpg');
 
 INSERT INTO ingredient_has_measurement_unit(ingredient_id, measurement_unit_id)
 VALUES (1, 1),

@@ -19,6 +19,9 @@ public class Recipe {
     @Column
     private String link;
 
+    @Column
+    private String pictureLink;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -69,5 +72,17 @@ public class Recipe {
 
     public List<RecipeIngredient> getRecipeIngredients() {
         return recipeIngredients;
+    }
+
+    public String getPictureLink() {
+        return pictureLink;
+    }
+
+    public void setPictureLink(String pictureLink) {
+        this.pictureLink = pictureLink;
+    }
+
+    public void setRecipeIngredients(List<RecipeIngredient> recipeIngredients) {
+        this.recipeIngredients = recipeIngredients;
     }
 }
