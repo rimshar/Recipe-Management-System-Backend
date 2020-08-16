@@ -222,3 +222,20 @@ VALUES(1, 1),
 (2, 2),
 (3, 2),
 (4, 2);
+
+
+CREATE VIEW v_ingredients_in_recipe
+		(
+		 id,
+		 name,
+		 ingredient_count
+		)
+AS
+	SELECT
+		r.id,
+		r.name,
+		COUNT(i.id)
+	FROM recipe r
+	     JOIN recipe_ingredient i ON r.id = i.recipe_id
+	GROUP BY r.id
+    ORDER BY COUNT(i.id) DESC;

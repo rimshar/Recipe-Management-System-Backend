@@ -3,7 +3,9 @@ package com.recipes.RecipeManagementBackend.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.recipes.RecipeManagementBackend.model.Recipe;
+import com.recipes.RecipeManagementBackend.model.RecipeIngredientView;
 import com.recipes.RecipeManagementBackend.model.RecipeTO;
+import com.recipes.RecipeManagementBackend.service.RecipeIngredientViewService;
 import com.recipes.RecipeManagementBackend.service.RecipeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,10 +20,12 @@ public class RecipeController {
     private static Logger LOG = LoggerFactory.getLogger(RecipeController.class);
 
     private RecipeService recipeService;
+    private RecipeIngredientViewService recipeIngredientViewService;
 
     @Autowired
-    public RecipeController(RecipeService recipeService) {
+    public RecipeController(RecipeService recipeService, RecipeIngredientViewService recipeIngredientViewService) {
         this.recipeService = recipeService;
+        this.recipeIngredientViewService = recipeIngredientViewService;
     }
 
     @GetMapping("/recipe/{id}")
@@ -31,6 +35,11 @@ public class RecipeController {
         return recipe;
     }
 
+    @GetMapping("/recipes/ingredients")
+    public List<RecipeIngredientView> getAllRecipeIngredientCount(){
+        LOG.info("getAllRecipeIngredientCounts");
+        return recipeIngredientViewService.getAllRecipeIngredientCount();
+    }
 
     @GetMapping("/recipes")
     public List<Recipe> getAllRecipes() {
