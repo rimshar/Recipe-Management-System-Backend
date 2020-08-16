@@ -15,6 +15,9 @@ public class RecipeIngredientView {
     @Column
     private Long ingredientCount;
 
+    @Column
+    private String username;
+
     public Long getId() {
         return id;
     }
@@ -25,5 +28,9 @@ public class RecipeIngredientView {
 
     public Long getIngredientCount() {
         return ingredientCount;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }

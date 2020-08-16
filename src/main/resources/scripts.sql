@@ -228,14 +228,17 @@ CREATE VIEW v_ingredients_in_recipe
 		(
 		 id,
 		 name,
+         username,
 		 ingredient_count
 		)
 AS
 	SELECT
 		r.id,
 		r.name,
+        u.username,
 		COUNT(i.id)
 	FROM recipe r
-	     JOIN recipe_ingredient i ON r.id = i.recipe_id
+	     INNER JOIN recipe_ingredient i ON r.id = i.recipe_id
+         INNER JOIN user u ON r.user_id = u.id
 	GROUP BY r.id
     ORDER BY COUNT(i.id) DESC;
