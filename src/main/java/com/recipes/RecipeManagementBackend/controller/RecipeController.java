@@ -2,6 +2,7 @@ package com.recipes.RecipeManagementBackend.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.recipes.RecipeManagementBackend.config.SecurityService;
 import com.recipes.RecipeManagementBackend.model.Recipe;
 import com.recipes.RecipeManagementBackend.model.RecipeIngredientView;
 import com.recipes.RecipeManagementBackend.model.RecipeTO;
@@ -21,11 +22,13 @@ public class RecipeController {
 
     private RecipeService recipeService;
     private RecipeIngredientViewService recipeIngredientViewService;
+    private SecurityService securityService;
 
     @Autowired
-    public RecipeController(RecipeService recipeService, RecipeIngredientViewService recipeIngredientViewService) {
+    public RecipeController(RecipeService recipeService, RecipeIngredientViewService recipeIngredientViewService, SecurityService securityService) {
         this.recipeService = recipeService;
         this.recipeIngredientViewService = recipeIngredientViewService;
+        this.securityService = securityService;
     }
 
     @GetMapping("/recipe/{id}")
@@ -45,6 +48,14 @@ public class RecipeController {
     public List<Recipe> getAllRecipes() {
         LOG.info("getAllRecipes");
         return recipeService.getAllRecipes();
+    }
+
+    @GetMapping("/my-recipes")
+    public List<Recipe> getAllRecipesOfCurrentUser() {
+        final long userId = securityService.getUserId();
+
+        LOG.info("getAllRecipes for the logged user");
+        return recipeService.getAllRecipesByUserId(userId);
     }
 
     @PostMapping("/recipe")
