@@ -43,6 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers("/h2-console/**").permitAll() // permit all requests to H2 console, they are secured anyway
                 .antMatchers(HttpMethod.POST, "/register").permitAll() // allow creation of users
                 .antMatchers(HttpMethod.POST, "/login").permitAll() // allow login for anonymous user
+                .antMatchers(HttpMethod.GET, "/recipes/ingredients").permitAll()
                 .anyRequest().authenticated(); // deny all other requests by default
     }
 }
