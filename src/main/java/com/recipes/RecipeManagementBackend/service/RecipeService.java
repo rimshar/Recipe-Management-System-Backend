@@ -55,6 +55,7 @@ public class RecipeService {
         recipeEntity.setInstructions(recipe.getInstructions());
         recipeEntity.setLink(recipe.getLink());
         recipeEntity.setUser(userService.getUserById(Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName())));
+        recipeEntity.setPictureLink(recipe.getPictureLink());
         Long recipeId = recipeRepository.save(recipeEntity).getId();
 
         for (RecipeIngredientTO ingredient : recipe.getIngredientBlock()) {

@@ -48,6 +48,7 @@ public class RecipeTO {
                 ", link='" + link + '\'' +
                 ", userId=" + userId +
                 ", ingredientBlock=" + ingredientBlock +
+                ", pictureLink=" + pictureLink +
                 '}';
     }
 
