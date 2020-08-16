@@ -6,6 +6,7 @@ public class RecipeTO {
     private String link;
     private Long userId;
     private RecipeIngredientTO[] ingredientBlock;
+    private String pictureLink;
 
     public String getName() {
         return name;
@@ -56,5 +57,13 @@ public class RecipeTO {
 
     public void setIngredientBlock(RecipeIngredientTO[] ingredientBlock) {
         this.ingredientBlock = ingredientBlock;
+    }
+
+    public String getPictureLink() {
+        return pictureLink;
+    }
+
+    public void setPictureLink(String pictureLink) {
+        this.pictureLink = pictureLink;
     }
 }
