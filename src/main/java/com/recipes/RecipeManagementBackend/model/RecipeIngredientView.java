@@ -18,6 +18,13 @@ public class RecipeIngredientView {
     @Column
     private String username;
 
+    @Column
+    private String pictureLink;
+
+    public String getPictureLink() {
+        return pictureLink;
+    }
+
     public Long getId() {
         return id;
     }

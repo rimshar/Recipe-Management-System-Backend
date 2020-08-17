@@ -226,20 +226,23 @@ VALUES(1, 1),
 
 
 CREATE VIEW v_ingredients_in_recipe
-		(
-		 id,
-		 name,
-         username,
-		 ingredient_count
-		)
-AS
-	SELECT
-		r.id,
-		r.name,
-        u.username,
-		COUNT(i.id)
-	FROM recipe r
-	     INNER JOIN recipe_ingredient i ON r.id = i.recipe_id
-         INNER JOIN user u ON r.user_id = u.id
-	GROUP BY r.id
-    ORDER BY COUNT(i.id) DESC;
+            		(
+            		 id,
+            		 name,
+                     username,
+            		 ingredient_count,
+                     picture_link
+            		)
+            AS
+            	SELECT
+            		r.id,
+            		r.name,
+                    u.username,
+            		COUNT(i.id),
+                    r.picture_link
+
+            	FROM recipe r
+            	     INNER JOIN recipe_ingredient i ON r.id = i.recipe_id
+                     INNER JOIN user u ON r.user_id = u.id
+            	GROUP BY r.id
+                ORDER BY COUNT(i.id) DESC;
