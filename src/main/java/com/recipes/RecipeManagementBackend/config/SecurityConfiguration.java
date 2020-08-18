@@ -44,6 +44,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/register").permitAll() // allow creation of users
                 .antMatchers(HttpMethod.POST, "/login").permitAll() // allow login for anonymous user
                 .antMatchers(HttpMethod.GET, "/recipes/ingredients").permitAll()
+                .antMatchers(HttpMethod.GET, "/{username}/recipes").permitAll() // allow see recipes by username
+                .antMatchers(HttpMethod.GET, "/recipe/{id}").permitAll() // allow to see individual recipes
                 .anyRequest().authenticated(); // deny all other requests by default
     }
 }
