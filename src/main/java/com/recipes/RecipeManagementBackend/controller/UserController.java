@@ -50,10 +50,16 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/user")
+    public void changeRole(@RequestBody Long id) {
+        System.out.println("Request received for " + id);
+        userService.changeRole(id);
+    }
+
     @PostMapping("/register")
     public void saveUser(@RequestBody UserTO user) {
         LOG.info("saveUser: " + user.toString());
         userService.save(user);
-
     }
 }
