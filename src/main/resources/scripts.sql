@@ -190,13 +190,13 @@ VALUES('gram'),
 ('millilitre');
 
 INSERT INTO recipe(name, instructions, link, user_id, picture_link)
-VALUES('omelette', 'whip up the egg and milk and just cook it on a pan', 'https://www.incredibleegg.org/recipe/basic-french-omelet/', 1, 'https://www.healthyfood.com/wp-content/uploads/2018/02/Basic-omelette-1024x656.jpg'),
-('omelette au fromage', 'take the eggs,
+VALUES('Omelette', 'Whip up the egg and milk and just cook it on a pan', 'https://www.incredibleegg.org/recipe/basic-french-omelet/', 1, 'https://www.healthyfood.com/wp-content/uploads/2018/02/Basic-omelette-1024x656.jpg'),
+('Omelette au fromage', 'Take the eggs,
 smash em,
 add the milk,
 whip it,
 sprinkle with grated cheese', 'https://www.food.com/recipe/cheese-omelette-omelette-au-fromage-271739', 2, 'https://food-images.files.bbci.co.uk/food/recipes/cheeseomelette_80621_16x9.jpg'),
-('boiled egg', 'put egg in water,
+('Boiled egg', 'Put egg in water,
 boil the water,
 voila!', 'https://www.simplyrecipes.com/recipes/how_to_make_perfect_hard_boiled_eggs/', 3, 'https://minimalistbaker.com/wp-content/uploads/2020/01/Hard-Boiled-Eggs-SQUARE.jpg');
 

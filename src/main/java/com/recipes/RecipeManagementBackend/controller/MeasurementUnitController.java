@@ -13,7 +13,6 @@ import java.util.List;
 
 
 @RestController("api/rest/MeasurementUnit.svc")
-@CrossOrigin(origins = "http://localhost:4200")
 public class MeasurementUnitController {
 
     private static Logger LOG = LoggerFactory.getLogger(RecipeManagementBackendApplication.class);
