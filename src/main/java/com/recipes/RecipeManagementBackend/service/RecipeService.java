@@ -31,8 +31,17 @@ public class RecipeService {
     }
 
     public Recipe getRecipeById(Long id) {
-        return recipeRepository.findById(id).orElseThrow(
+        Recipe recipe = recipeRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Recipe " + id + " not found!"));
+
+        String instructions = recipe.getInstructions();
+        String newLine = "\n";
+        String htmlBreak = "<br>";
+        String htmlInstructions = instructions.replace(newLine, htmlBreak);
+
+        recipe.setInstructions(htmlInstructions);
+
+        return recipe;
     }
 
     public List<Recipe> getAllRecipesByUsername(String username) {
@@ -53,6 +62,7 @@ public class RecipeService {
         final Recipe recipeEntity = new Recipe();
         recipeEntity.setName(recipe.getName());
         recipeEntity.setInstructions(recipe.getInstructions());
+
         recipeEntity.setLink(recipe.getLink());
         recipeEntity.setUser(userService.getUserById(Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName())));
         recipeEntity.setPictureLink(recipe.getPictureLink());

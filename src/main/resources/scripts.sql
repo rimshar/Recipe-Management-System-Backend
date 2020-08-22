@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `Final_Project`.`recipe_ingredient` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `recipe_id` INT UNSIGNED NOT NULL,
   `ingredient_id` INT UNSIGNED NOT NULL,
-  `quantity` DECIMAL(10) NOT NULL,
+  `quantity` DOUBLE(10, 2) NOT NULL,
   `measurement_unit_id` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id`, `recipe_id`, `ingredient_id`),
   INDEX `fk_recipe_has_ingredient_ingredient1_idx` (`ingredient_id` ASC) VISIBLE,
