@@ -28,6 +28,7 @@ public class UserController {
         this.recipeService = recipeService;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/user/{id}")
     public User getUserById(@PathVariable Long id) {
         LOG.info("getUserById: " + id);

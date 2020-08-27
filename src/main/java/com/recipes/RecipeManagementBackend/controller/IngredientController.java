@@ -23,21 +23,18 @@ public class IngredientController {
         this.ingredientService = ingredientService;
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/ingredient/{id}")
     public Ingredient getIngredientById(@PathVariable long id) {
         LOG.info("getIngredientById: " + id);
         return ingredientService.getIngredientById(id);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/ingredients")
     public List<Ingredient> getAllIngredients() {
         LOG.info("getAllIngredients");
         return ingredientService.getAllIngredients();
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/ingredient")
     public void saveIngredient(@RequestBody Ingredient ingredient) {
         LOG.info("saveIngredient: " + ingredient);

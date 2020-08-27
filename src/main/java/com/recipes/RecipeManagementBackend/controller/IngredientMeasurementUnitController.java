@@ -24,21 +24,18 @@ public class IngredientMeasurementUnitController {
         this.ingredientMeasurementUnitService = ingredientMeasurementUnitService;
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/ingredient-measurement-unit/{id}")
     public IngredientMeasurementUnit getIngredientMeasurementUnitById(@PathVariable long id) {
         LOG.info("getIngredientMeasurementUnitById: " + id);
         return ingredientMeasurementUnitService.getIngredientMeasurementUnitById(id);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/ingredient-measurement-units")
     public List<IngredientMeasurementUnit> getAllIngredientMeasurementUnits() {
         LOG.info("getAllIngredientMeasurementUnits");
         return ingredientMeasurementUnitService.getAllIngredientMeasurementUnits();
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/ingredient-measurement-units/ingredient/{id}")
     public List<MeasurementUnit> getMeasurementUnitsByIngredient(@PathVariable long id){
         LOG.info("getMeasurementUnitsByIngredient");
