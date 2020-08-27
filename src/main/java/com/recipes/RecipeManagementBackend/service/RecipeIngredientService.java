@@ -4,12 +4,13 @@ import com.recipes.RecipeManagementBackend.exception.EntityNotFoundException;
 import com.recipes.RecipeManagementBackend.model.RecipeIngredient;
 import com.recipes.RecipeManagementBackend.repository.RecipeIngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 
-@Component
+@Service
 public class RecipeIngredientService {
     private RecipeIngredientRepository recipeIngredientRepository;
 
@@ -18,6 +19,7 @@ public class RecipeIngredientService {
         this.recipeIngredientRepository = recipeIngredientRepository;
     }
 
+    @Transactional
     public void saveRecipeIngredient(RecipeIngredient recipeIngredient) {
         recipeIngredientRepository.save(recipeIngredient);
     }

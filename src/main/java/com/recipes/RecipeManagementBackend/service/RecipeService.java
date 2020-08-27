@@ -6,12 +6,12 @@ import com.recipes.RecipeManagementBackend.repository.RecipeIngredientRepository
 import com.recipes.RecipeManagementBackend.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Component
+@Service
 public class RecipeService {
 
     private RecipeRepository recipeRepository;
@@ -56,7 +56,7 @@ public class RecipeService {
         return recipeRepository.findAll();
     }
 
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(noRollbackFor = EntityNotFoundException.class)
     public void saveRecipe(final RecipeTO recipe) {
 
         final Recipe recipeEntity = new Recipe();
@@ -72,28 +72,32 @@ public class RecipeService {
             final RecipeIngredient ingredients = new RecipeIngredient();
             ingredients.setQuantity(ingredient.getQuantity());
             ingredients.setRecipeId(recipeId);
-            // ingredients.setRecipe(recipeRepository.getOne(recipeId));
 
+            MeasurementUnit measurementUnitEntity = new MeasurementUnit();
 
             try {
-                MeasurementUnit measurementUnitEntity = measurementUnitService.getMeasurementUnitByName(ingredient.getMeasurementUnit());
-                ingredients.setMeasurementUnit(measurementUnitEntity);
-            } catch (EntityNotFoundException exception) {
-                MeasurementUnit measurementUnitEntity = new MeasurementUnit();
+                measurementUnitEntity = measurementUnitService.getMeasurementUnitByName(ingredient.getMeasurementUnit());
+            } catch (EntityNotFoundException ignored) {
+            }
+
+            if (measurementUnitEntity.getName() == null) {
                 measurementUnitEntity.setName(ingredient.getMeasurementUnit());
                 measurementUnitEntity = measurementUnitService.saveMeasurementUnit(measurementUnitEntity);
-                ingredients.setMeasurementUnit(measurementUnitEntity);
             }
+            ingredients.setMeasurementUnit(measurementUnitEntity);
+
+            Ingredient ingredientEntity = new Ingredient();
 
             try {
-                Ingredient ingredientEntity = ingredientService.getIngredientByName(ingredient.getIngredient());
-                ingredients.setIngredient(ingredientEntity);
-            } catch (EntityNotFoundException exception) {
-                Ingredient ingredientEntity = new Ingredient();
+                ingredientEntity = ingredientService.getIngredientByName(ingredient.getIngredient());
+            } catch (EntityNotFoundException ignored) {
+            }
+
+            if (ingredientEntity.getName() == null) {
                 ingredientEntity.setName(ingredient.getIngredient());
                 ingredientEntity = ingredientService.saveIngredient(ingredientEntity);
-                ingredients.setIngredient(ingredientEntity);
             }
+            ingredients.setIngredient(ingredientEntity);
 
             recipeIngredientRepository.save(ingredients);
         }

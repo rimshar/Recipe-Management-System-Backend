@@ -27,10 +27,9 @@ public class RecipeIngredientController {
     }
 
     @GetMapping("/recipeIngredient/{id}")
-    public RecipeIngredient getRecipeById(@PathVariable Long id) {
+    public RecipeIngredient getRecipeById(@PathVariable long id) {
         LOG.info("getRecipeIngredientById: " + id);
-        RecipeIngredient recipeIngredient = recipeIngredientService.getRecipeIngredientById(id);
-        return recipeIngredient;
+        return recipeIngredientService.getRecipeIngredientById(id);
     }
 
     @GetMapping("/recipeIngredient")

@@ -5,12 +5,13 @@ import com.recipes.RecipeManagementBackend.model.IngredientMeasurementUnit;
 import com.recipes.RecipeManagementBackend.model.MeasurementUnit;
 import com.recipes.RecipeManagementBackend.repository.IngredientMeasurementUnitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+@Service
 public class IngredientMeasurementUnitService {
 
     private IngredientMeasurementUnitRepository ingredientMeasurementUnitRepository;
@@ -29,6 +30,7 @@ public class IngredientMeasurementUnitService {
         return ingredientMeasurementUnitRepository.findAll();
     }
 
+    @Transactional
     public void saveIngredientMeasurementUnit(IngredientMeasurementUnit ingredientMeasurementUnit){
         ingredientMeasurementUnitRepository.save(ingredientMeasurementUnit);
     }

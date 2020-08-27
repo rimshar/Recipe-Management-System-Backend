@@ -4,12 +4,12 @@ import com.recipes.RecipeManagementBackend.exception.EntityNotFoundException;
 import com.recipes.RecipeManagementBackend.model.MeasurementUnit;
 import com.recipes.RecipeManagementBackend.repository.MeasurementUnitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Service
 public class MeasurementUnitService {
 
     private MeasurementUnitRepository measurementUnitRepository;
@@ -24,14 +24,10 @@ public class MeasurementUnitService {
     }
 
     public List<MeasurementUnit> getAllMeasurementUnits() {
-        Iterable<MeasurementUnit> iterable
-                = measurementUnitRepository.findAll();
-        List<MeasurementUnit> result
-                = new ArrayList<>();
-        iterable.forEach(result::add);
-        return result;
+        return measurementUnitRepository.findAll();
     }
 
+    @Transactional
     public MeasurementUnit saveMeasurementUnit(MeasurementUnit measurementUnit){
         return measurementUnitRepository.save(measurementUnit);
     }

@@ -1,6 +1,5 @@
 package com.recipes.RecipeManagementBackend.controller;
 
-import com.recipes.RecipeManagementBackend.exception.UserAlreadyExists;
 import com.recipes.RecipeManagementBackend.model.Recipe;
 import com.recipes.RecipeManagementBackend.model.User;
 import com.recipes.RecipeManagementBackend.model.UserTO;
@@ -32,8 +31,7 @@ public class UserController {
     @GetMapping("/user/{id}")
     public User getUserById(@PathVariable Long id) {
         LOG.info("getUserById: " + id);
-        User user = userService.getUserById(id);
-        return user;
+        return userService.getUserById(id);
     }
 
     @GetMapping("/{username}/recipes")
@@ -52,7 +50,7 @@ public class UserController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/user")
     public void changeRole(@RequestBody Long id) {
-        System.out.println("Request received for " + id);
+        LOG.info("Request received for " + id);
         userService.changeRole(id);
     }
 

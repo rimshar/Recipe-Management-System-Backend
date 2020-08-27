@@ -36,12 +36,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().csrf().disable().cors().and().headers().frameOptions()
-                .sameOrigin() // allow frameOptions for H2 console
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().csrf().disable().cors().and().headers()
                 .and().exceptionHandling().and().addFilter(jwtAuthFilterBean())
 
-                .authorizeRequests().antMatchers("/h2-console/**").permitAll() // permit all requests to H2 console, they are secured anyway
-                .antMatchers(HttpMethod.POST, "/register").permitAll() // allow creation of users
+                .authorizeRequests().antMatchers(HttpMethod.POST, "/register").permitAll() // allow creation of users
                 .antMatchers(HttpMethod.POST, "/login").permitAll() // allow login for anonymous user
                 .antMatchers(HttpMethod.GET, "/recipes/ingredients").permitAll()
                 .antMatchers(HttpMethod.GET, "/{username}/recipes").permitAll() // allow see recipes by username

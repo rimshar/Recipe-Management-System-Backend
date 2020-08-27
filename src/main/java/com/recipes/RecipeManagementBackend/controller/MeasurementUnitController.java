@@ -24,13 +24,14 @@ public class MeasurementUnitController {
         this.measurementUnitService = measurementUnitService;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/measurement-unit/{id}")
-    public MeasurementUnit getMeasurementUnitById(@PathVariable Long id) {
+    public MeasurementUnit getMeasurementUnitById(@PathVariable long id) {
         LOG.info("getMeasurementUnitById: " + id);
-        MeasurementUnit measurementUnit = measurementUnitService.getMeasurementUnitById(id);
-        return measurementUnit;
+        return measurementUnitService.getMeasurementUnitById(id);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/measurement-units")
     public List<MeasurementUnit> getAllMeasurementUnits() {
         LOG.info("getAllMeasurementUnits");

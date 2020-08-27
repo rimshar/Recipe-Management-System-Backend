@@ -2,8 +2,6 @@ package com.recipes.RecipeManagementBackend.model;
 
 import javax.persistence.*;
 
-//Defines allowed Measurement Units for specific Ingredients
-
 @Entity
 @Table(name="ingredient_has_measurement_unit")
 public class IngredientMeasurementUnit {

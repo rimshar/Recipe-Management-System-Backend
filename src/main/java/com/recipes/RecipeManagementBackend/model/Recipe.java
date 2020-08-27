@@ -62,8 +62,10 @@ public class Recipe {
         this.link = link;
     }
 
-    public User getUser() {
-        return user;
+    public UserTO getUser() {
+        UserTO userTO = new UserTO();
+        userTO.setUsername(user.getUsername());
+        return userTO;
     }
 
     public void setUser(User user) {

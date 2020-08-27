@@ -9,13 +9,12 @@ import com.recipes.RecipeManagementBackend.repository.RoleRepository;
 import com.recipes.RecipeManagementBackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Service
 public class UserService {
 
     private UserRepository userRepository;
@@ -29,10 +28,12 @@ public class UserService {
         this.roleRepository = roleRepository;
     }
 
+
     public User getUserById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User " + id + " not found!"));
     }
 
+    @Transactional
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("User " + username + " not found!"));
     }
@@ -41,21 +42,13 @@ public class UserService {
         return userRepository.findByUsername(username).isPresent();
     }
 
-
     public Long getUserRoleByUsername(String username) {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("User " + username + " not found!"));
-        Long roleId = user.getRole().getId();
-        return roleId;
+        return user.getRole().getId();
     }
 
-
     public List<User> getAllUsers() {
-        Iterable<User> iterable
-                = userRepository.findAll();
-        List<User> result
-                = new ArrayList<>();
-        iterable.forEach(result::add);
-        return result;
+        return userRepository.findAll();
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -73,6 +66,7 @@ public class UserService {
         return userRepository.save(userEntity);
     }
 
+    @Transactional
     public void changeRole(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User " + id + " not found!"));
         Role adminRole = roleRepository.findByRole(Roles.ROLE_ADMIN);

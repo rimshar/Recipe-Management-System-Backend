@@ -31,10 +31,9 @@ public class RecipeController {
     }
 
     @GetMapping("/recipe/{id}")
-    public Recipe getRecipeById(@PathVariable Long id) {
+    public Recipe getRecipeById(@PathVariable long id) {
         LOG.info("getRecipeById: " + id);
-        Recipe recipe = recipeService.getRecipeById(id);
-        return recipe;
+        return recipeService.getRecipeById(id);
     }
 
     @GetMapping("/recipes/ingredients")
@@ -52,7 +51,6 @@ public class RecipeController {
     @GetMapping("/my-recipes")
     public List<Recipe> getAllRecipesOfCurrentUser() {
         final long userId = securityService.getUserId();
-
         LOG.info("getAllRecipes for the logged user");
         return recipeService.getAllRecipesByUserId(userId);
     }

@@ -1,7 +1,5 @@
 package com.recipes.RecipeManagementBackend.config;
 
-import com.recipes.RecipeManagementBackend.model.Role;
-
 public class AuthenticationResult {
 
 	private String token;
