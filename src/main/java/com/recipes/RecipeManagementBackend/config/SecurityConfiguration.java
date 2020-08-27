@@ -37,8 +37,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().csrf().disable().cors().and().headers()
+                .frameOptions().sameOrigin()
                 .and().exceptionHandling().and().addFilter(jwtAuthFilterBean())
-
                 .authorizeRequests().antMatchers(HttpMethod.POST, "/register").permitAll() // allow creation of users
                 .antMatchers(HttpMethod.POST, "/login").permitAll() // allow login for anonymous user
                 .antMatchers(HttpMethod.GET, "/recipes/ingredients").permitAll()
