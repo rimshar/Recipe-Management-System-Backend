@@ -19,10 +19,6 @@ public class RecipeIngredient {
     @Column
     private Long recipeId;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "recipe_id")
-//    private Recipe recipe;
-
     @Column
     private Double quantity;
 

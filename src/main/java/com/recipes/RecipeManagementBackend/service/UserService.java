@@ -1,20 +1,26 @@
 package com.recipes.RecipeManagementBackend.service;
 
 import com.recipes.RecipeManagementBackend.exception.EntityNotFoundException;
+import com.recipes.RecipeManagementBackend.exception.InvalidEmailException;
+import com.recipes.RecipeManagementBackend.exception.InvalidPasswordException;
+import com.recipes.RecipeManagementBackend.exception.UserAlreadyExistsException;
 import com.recipes.RecipeManagementBackend.model.Role;
 import com.recipes.RecipeManagementBackend.model.Roles;
 import com.recipes.RecipeManagementBackend.model.User;
 import com.recipes.RecipeManagementBackend.model.UserTO;
 import com.recipes.RecipeManagementBackend.repository.RoleRepository;
 import com.recipes.RecipeManagementBackend.repository.UserRepository;
+import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
 @Service
+@Validated
 public class UserService {
 
     private UserRepository userRepository;
@@ -42,6 +48,18 @@ public class UserService {
         return userRepository.findByUsername(username).isPresent();
     }
 
+    public boolean emailExists(String email) {
+        return userRepository.findByEmail(email).isPresent();
+    }
+
+    public boolean validPassword(String password) {
+        return password.length() >= 8 && password.length() <= 30;
+    }
+
+    public boolean validEmail(String email) {
+        return EmailValidator.getInstance(true).isValid(email);
+    }
+
     public Long getUserRoleByUsername(String username) {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("User " + username + " not found!"));
         return user.getRole().getId();
@@ -55,7 +73,13 @@ public class UserService {
     public User save(final UserTO user) {
 
         if (usernameExists(user.getUsername())) {
-            throw new EntityNotFoundException("User " + user.getUsername() + " already exists");
+            throw new UserAlreadyExistsException("User " + user.getUsername() + " already exists");
+        } else if (emailExists(user.getEmail())) {
+            throw new UserAlreadyExistsException("Email " + user.getEmail() + " already registered");
+        } else if (!validEmail(user.getEmail())) {
+            throw new InvalidEmailException("Please enter a valid email");
+        } else if (!validPassword(user.getPassword())) {
+            throw new InvalidPasswordException("Password should be between 8 and 30 symbols");
         }
 
         final User userEntity = new User();

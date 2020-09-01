@@ -34,18 +34,19 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Final-Project`.`recipe`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Final-Project`.`recipe` (
+CREATE TABLE IF NOT EXISTS `Final_Project`.`recipe` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `instructions` TEXT(10000) NULL,
   `link` VARCHAR(245) NULL,
-  `owner_id` INT UNSIGNED NOT NULL,
+  `picture_link` VARCHAR(245) NULL,
+  `user_id` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_recipe_user1_idx` (`owner_id` ASC) VISIBLE,
+  INDEX `fk_recipe_user1_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `fk_recipe_user1`
-    FOREIGN KEY (`owner_id`)
-    REFERENCES `Final-Project`.`user` (`id`)
-    ON DELETE NO ACTION
+    FOREIGN KEY (`user_id`)
+    REFERENCES `Final_Project`.`user` (`id`)
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -73,28 +74,29 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Final-Project`.`recipe_ingredient`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Final-Project`.`recipe_ingredient` (
-  `recipe_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `Final_Project`.`recipe_ingredient` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `recipe_id` INT UNSIGNED NOT NULL,
   `ingredient_id` INT UNSIGNED NOT NULL,
   `quantity` DECIMAL(10) NOT NULL,
   `measurement_unit_id` INT UNSIGNED NOT NULL,
-  PRIMARY KEY (`recipe_id`, `ingredient_id`),
+  PRIMARY KEY (`id`, `recipe_id`, `ingredient_id`),
   INDEX `fk_recipe_has_ingredient_ingredient1_idx` (`ingredient_id` ASC) VISIBLE,
   INDEX `fk_recipe_has_ingredient_recipe_idx` (`recipe_id` ASC) VISIBLE,
   INDEX `fk_recipe_has_ingredient_measurement_units1_idx` (`measurement_unit_id` ASC) VISIBLE,
   CONSTRAINT `fk_recipe_has_ingredient_recipe`
     FOREIGN KEY (`recipe_id`)
-    REFERENCES `Final-Project`.`recipe` (`id`)
-    ON DELETE NO ACTION
+    REFERENCES `Final_Project`.`recipe` (`id`)
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_recipe_has_ingredient_ingredient1`
     FOREIGN KEY (`ingredient_id`)
-    REFERENCES `Final-Project`.`ingredient` (`id`)
+    REFERENCES `Final_Project`.`ingredient` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_recipe_has_ingredient_measurement_units1`
     FOREIGN KEY (`measurement_unit_id`)
-    REFERENCES `Final-Project`.`measurement_unit` (`id`)
+    REFERENCES `Final_Project`.`measurement_unit` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
